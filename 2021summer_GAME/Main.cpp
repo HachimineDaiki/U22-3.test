@@ -9,7 +9,8 @@
 #include "Title.h"
 #include "Gameover.h"
 #include "User_Interface.h"
-
+// EffekseerForDXLib.hをインクルードします。
+#include "EffekseerForDXLib.h"
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
     //タイトル
     SetMainWindowText("この不法投棄物に粛清を！");
@@ -26,7 +27,29 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         // エラーが発生したら直ちに終了
         return -1;
     }
+    // Effekseerを初期化する。
+  // 引数には画面に表示する最大パーティクル数を設定する。
+    if (Effekseer_Init(8000) == -1)
+    {
+        DxLib_End();
+        return -1;
+    }
     SetDrawScreen(DX_SCREEN_BACK);
+
+
+    // DirectX11を使用するようにする。(DirectX9も可、一部機能不可)
+    // Effekseerを使用するには必ず設定する。
+    SetUseDirect3DVersion(DX_DIRECT3D_11);
+
+    // フルスクリーンウインドウの切り替えでリソースが消えるのを防ぐ。
+    // Effekseerを使用する場合は必ず設定する。
+    SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
+
+    // DXライブラリのデバイスロストした時のコールバックを設定する。
+    // ウインドウとフルスクリーンの切り替えが発生する場合は必ず実行する。
+    // ただし、DirectX11を使用する場合は実行する必要はない。
+    Effekseer_SetGraphicsDeviceLostCallbackFunctions();
+
     //--------------初期化関数
     Titleinit();
     Gameoverinit();
@@ -45,6 +68,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     SetUseZBuffer3D(TRUE);
     // Ｚバッファへの書き込みを有効にする
     SetWriteZBuffer3D(TRUE);
+
+    // DXライブラリのカメラとEffekseerのカメラを同期する。
+    Effekseer_Sync3DSetting();
+
 
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
     {
@@ -69,6 +96,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         ScreenFlip();//裏画面の内容を表画面に反映する
     }
 
+    // Effekseerを終了する。
+    Effkseer_End();
+
     Model3d_dlet();//3dモデル削除
     DxLib_End();
     // ソフトの終了
@@ -76,6 +106,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 }
 
 void Gamemain() {
+    //読み込む時に大きさを指定する。
+    int effectResourceHandle = LoadEffekseerEffect("3Dmodel/exploadSample03.efk", 50.0f);
+    // 何でもいいので画像を読み込む。
+    int grBackgroundHandle = LoadGraph(_T("images/Star.png"));
+    // 再生中のエフェクトのハンドルを初期化する。
+    int playingEffectHandle = -1;
+
     //------------------------------入力関数
     Input_camera_move();//カメラ入力
     //------------------------------計算関数
@@ -120,6 +157,18 @@ void Gamemain() {
             obj.zmove = 0;
         }
     }
+
+    //何でもいいので画像を描画する。
+    // こうして描画した後でないと、Effekseerは描画できない。
+    //DrawGraph(sph[0].pos.x, sph[0].pos.y, grBackgroundHandle, TRUE);
+
+        // 再生中のエフェクトを移動する。
+    SetPosPlayingEffekseer3DEffect(playingEffectHandle, sph[0].pos.x, sph[0].v.y, sph[0].v.z);
+
+
+    // Effekseerにより再生中のエフェクトを更新する。
+    UpdateEffekseer3D();
+
 
     //減速エリアに入っているかチェック
     decel.hit_flg = false;//減速フラグ
@@ -200,4 +249,18 @@ void Gamemain() {
     if (htdrow.hitflg) {
         UIdraw();
     }
+    //エフェクトを使う
+    if (sph[0].hp <= 0) {
+        // エフェクトを再生する。
+        playingEffectHandle = PlayEffekseer3DEffect(effectResourceHandle);
+        //DrawEffect();
+            // Effekseerにより再生中のエフェクトを描画する。
+        DrawEffekseer3D();
+    }
+
+
+
+    // エフェクトリソースを削除する。(Effekseer終了時に破棄されるので削除しなくてもいい)
+    DeleteEffekseerEffect(effectResourceHandle);
+
 }

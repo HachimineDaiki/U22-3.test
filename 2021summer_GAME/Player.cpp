@@ -129,7 +129,7 @@ void P_hp(int obssize) {
     rock[0].handle_num = P_rest_hp_handle(sph[0].hp);
     //HP‚ª0‚æ‚è‰º‚ª‚ç‚È‚¢
     if (sph[0].hp <= 0) {
-        gameMode = 2;
+       // gameMode = 2;
         sph[0].hp = 0;
     }
 }
