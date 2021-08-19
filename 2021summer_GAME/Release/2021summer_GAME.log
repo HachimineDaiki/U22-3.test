@@ -1,0 +1,11 @@
+﻿  Main.cpp
+D:\2021summer_GAME\2021summer_GAME\Main.h(42,13): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+D:\2021summer_GAME\2021summer_GAME\Main.cpp(115,35): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\2021summer_GAME\2021summer_GAME\Main.cpp(146,21): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  Title.cpp
+  コード生成しています。
+  5 of 59 functions ( 8.5%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  コード生成が終了しました。
+  2021summer_GAME.vcxproj -> D:\2021summer_GAME\2021summer_GAME\Release\2021summer_GAME.exe

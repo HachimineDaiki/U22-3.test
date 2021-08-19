@@ -1,0 +1,18 @@
+﻿  3Dmodel.cpp
+D:\2021summer_GAME\2021summer_GAME\3Dmodel.cpp(1,10): fatal error C1083: include ファイルを開けません。'DxLib.h':No such file or directory
+  Camera.cpp
+D:\2021summer_GAME\2021summer_GAME\Camera.cpp(1,10): fatal error C1083: include ファイルを開けません。'DxLib.h':No such file or directory
+  Gameover.cpp
+D:\2021summer_GAME\2021summer_GAME\Gameover.cpp(1,10): fatal error C1083: include ファイルを開けません。'DxLib.h':No such file or directory
+  Hit_check.cpp
+D:\2021summer_GAME\2021summer_GAME\Hit_check.cpp(1,10): fatal error C1083: include ファイルを開けません。'Dxlib.h':No such file or directory
+  Init.cpp
+D:\2021summer_GAME\2021summer_GAME\Init.h(2,10): fatal error C1083: include ファイルを開けません。'DxLib.h':No such file or directory
+  Main.cpp
+D:\2021summer_GAME\2021summer_GAME\Main.cpp(1,10): fatal error C1083: include ファイルを開けません。'Dxlib.h':No such file or directory
+  Param_Info.cpp
+D:\2021summer_GAME\2021summer_GAME\Param_Info.cpp(1,10): fatal error C1083: include ファイルを開けません。'DxLib.h':No such file or directory
+  Player.cpp
+D:\2021summer_GAME\2021summer_GAME\Player.cpp(1,9): fatal error C1083: include ファイルを開けません。'DxLib.h':No such file or directory
+  Title.cpp
+D:\2021summer_GAME\2021summer_GAME\Title.cpp(1,10): fatal error C1083: include ファイルを開けません。'DxLib.h':No such file or directory

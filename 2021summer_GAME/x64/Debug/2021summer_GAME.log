@@ -1,0 +1,8 @@
+﻿  Hit_check.cpp
+C:\Users\Hachimine Daiki\Desktop\U-22-3\2021summer_GAME\Hit_check.cpp(1,10): fatal error C1083: include ファイルを開けません。'Dxlib.h':No such file or directory
+  Init.cpp
+  Main.cpp
+C:\Users\Hachimine Daiki\Desktop\U-22-3\2021summer_GAME\Main.cpp(1,10): fatal error C1083: include ファイルを開けません。'Dxlib.h':No such file or directory
+  Player.cpp
+C:\Users\Hachimine Daiki\Desktop\U-22-3\2021summer_GAME\Player.cpp(1,9): fatal error C1083: include ファイルを開けません。'DxLib.h':No such file or directory
+  コードを生成中...
